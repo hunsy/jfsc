@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{50} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="sqlLog" level="DEBUG"/>
+    <logger name="ch.qos.logback" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="com.github.miemiedev" level="ERROR"/>
+    <logger name="net.sf.ehcache" level="ERROR"/>
+    <logger name="org.apache.commons" level="ERROR"/>
+    <logger name="org.mybatis.spring" level="INFO"/>
+    <logger name="com.hunsy.pointshop" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

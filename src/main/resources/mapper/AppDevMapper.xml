@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hunsy.pointshop.mapper.AppDevMapper">
+    <resultMap id="BaseResultMap" type="com.hunsy.pointshop.entity.AppDev">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="dev_id" property="devId" jdbcType="BIGINT"/>
+        <result column="app_id" property="appId" jdbcType="BIGINT"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
+        <result column="valid" property="valid" jdbcType="TINYINT"/>
+    </resultMap>
+
+
+    <resultMap id="DtoResultMap" type="com.hunsy.pointshop.entity.dto.AppDevDto">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="country_code" property="countryCode" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <!-- <result column="salt" property="salt" jdbcType="VARCHAR" />-->
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="dev_id" property="devId" jdbcType="BIGINT"/>
+        <result column="app_id" property="appId" jdbcType="BIGINT"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+        <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="findList" resultMap="DtoResultMap" parameterType="com.hunsy.pointshop.entity.dto.AppDevDto">
+        SELECT
+        ad.*,
+        a.name,adv.country_code,adv.mobile,adv.nick_name,adv.avatar,adv.email
+        FROM app_dev ad
+        LEFT JOIN app a ON a.id = ad.app_id
+        LEFT JOIN app_developer adv ON ad.dev_id = adv.id
+        WHERE
+        1=1
+        <if test="adv.devId != null and adv.devId != ''">
+            AND ad.dev_id = #{adv.devId}
+            AND a.valid = 1
+        </if>
+        <if test="adv.appId != null and appId != ''">
+            AND ad.app_id = #{adv.appId}
+            AND adv.valid = 1
+        </if>
+        ORDER BY ad.created_at DESC
+    </select>
+
+
+</mapper>
