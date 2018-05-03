@@ -50,7 +50,7 @@
             AND ad.dev_id = #{adv.devId}
             AND a.valid = 1
         </if>
-        <if test="adv.appId != null and appId != ''">
+        <if test="adv.appId != null and adv.appId != ''">
             AND ad.app_id = #{adv.appId}
             AND adv.valid = 1
         </if>
