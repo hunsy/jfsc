@@ -1,12 +1,14 @@
 package com.hunsy.pointshop.entity;
 
+import com.hunsy.pointshop.commons.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "user_modal_times")
-public class UserModalTimes {
-    @Id
-    private Long id;
+public class UserModalTimes extends BaseEntity {
+
 
     /**
      * app_id
@@ -15,25 +17,25 @@ public class UserModalTimes {
     private Long appId;
 
     /**
-     * ÓÃ»§ÕËºÅ
+     * ç”¨æˆ·è´¦å·
      */
     @Column(name = "user_account")
     private String userAccount;
 
     /**
-     * ÊÂ¼şÂë
+     * äº‹ä»¶ç 
      */
     @Column(name = "serial_id")
     private Long serialId;
 
     /**
-     * ÊÂ¼şÀàĞÍ
+     * äº‹ä»¶ç±»å‹
      */
     @Column(name = "modal_type")
     private Integer modalType;
 
     /**
-     * ÊÂ¼ş´¥·¢´ÎÊı
+     * äº‹ä»¶è§¦å‘æ¬¡æ•°
      */
     private Integer times;
 
@@ -44,26 +46,13 @@ public class UserModalTimes {
     private Date updatedAt;
 
     /**
-     * É¾³ı±êÊ¶  1 Õı³£ 0 É¾³ı
+     * åˆ é™¤æ ‡è¯†  1 æ­£å¸¸ 0 åˆ é™¤
      */
     private Byte valid;
 
-    /**
-     * @return id
-     */
-    public Long getId() {
-        return id;
-    }
 
     /**
-     * @param id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * »ñÈ¡app_id
+     * è·å–app_id
      *
      * @return app_id - app_id
      */
@@ -72,7 +61,7 @@ public class UserModalTimes {
     }
 
     /**
-     * ÉèÖÃapp_id
+     * è®¾ç½®app_id
      *
      * @param appId app_id
      */
@@ -81,72 +70,72 @@ public class UserModalTimes {
     }
 
     /**
-     * »ñÈ¡ÓÃ»§ÕËºÅ
+     * è·å–ç”¨æˆ·è´¦å·
      *
-     * @return user_account - ÓÃ»§ÕËºÅ
+     * @return user_account - ç”¨æˆ·è´¦å·
      */
     public String getUserAccount() {
         return userAccount;
     }
 
     /**
-     * ÉèÖÃÓÃ»§ÕËºÅ
+     * è®¾ç½®ç”¨æˆ·è´¦å·
      *
-     * @param userAccount ÓÃ»§ÕËºÅ
+     * @param userAccount ç”¨æˆ·è´¦å·
      */
     public void setUserAccount(String userAccount) {
         this.userAccount = userAccount;
     }
 
     /**
-     * »ñÈ¡ÊÂ¼şÂë
+     * è·å–äº‹ä»¶ç 
      *
-     * @return serial_id - ÊÂ¼şÂë
+     * @return serial_id - äº‹ä»¶ç 
      */
     public Long getSerialId() {
         return serialId;
     }
 
     /**
-     * ÉèÖÃÊÂ¼şÂë
+     * è®¾ç½®äº‹ä»¶ç 
      *
-     * @param serialId ÊÂ¼şÂë
+     * @param serialId äº‹ä»¶ç 
      */
     public void setSerialId(Long serialId) {
         this.serialId = serialId;
     }
 
     /**
-     * »ñÈ¡ÊÂ¼şÀàĞÍ
+     * è·å–äº‹ä»¶ç±»å‹
      *
-     * @return modal_type - ÊÂ¼şÀàĞÍ
+     * @return modal_type - äº‹ä»¶ç±»å‹
      */
     public Integer getModalType() {
         return modalType;
     }
 
     /**
-     * ÉèÖÃÊÂ¼şÀàĞÍ
+     * è®¾ç½®äº‹ä»¶ç±»å‹
      *
-     * @param modalType ÊÂ¼şÀàĞÍ
+     * @param modalType äº‹ä»¶ç±»å‹
      */
     public void setModalType(Integer modalType) {
         this.modalType = modalType;
     }
 
     /**
-     * »ñÈ¡ÊÂ¼ş´¥·¢´ÎÊı
+     * è·å–äº‹ä»¶è§¦å‘æ¬¡æ•°
      *
-     * @return times - ÊÂ¼ş´¥·¢´ÎÊı
+     * @return times - äº‹ä»¶è§¦å‘æ¬¡æ•°
      */
     public Integer getTimes() {
         return times;
     }
 
     /**
-     * ÉèÖÃÊÂ¼ş´¥·¢´ÎÊı
+     * è®¾ç½®äº‹ä»¶è§¦å‘æ¬¡æ•°
      *
-     * @param times ÊÂ¼ş´¥·¢´ÎÊı
+     * @param times äº‹ä»¶è§¦å‘æ¬¡æ•°
      */
     public void setTimes(Integer times) {
         this.times = times;
@@ -181,18 +170,18 @@ public class UserModalTimes {
     }
 
     /**
-     * »ñÈ¡É¾³ı±êÊ¶  1 Õı³£ 0 É¾³ı
+     * è·å–åˆ é™¤æ ‡è¯†  1 æ­£å¸¸ 0 åˆ é™¤
      *
-     * @return valid - É¾³ı±êÊ¶  1 Õı³£ 0 É¾³ı
+     * @return valid - åˆ é™¤æ ‡è¯†  1 æ­£å¸¸ 0 åˆ é™¤
      */
     public Byte getValid() {
         return valid;
     }
 
     /**
-     * ÉèÖÃÉ¾³ı±êÊ¶  1 Õı³£ 0 É¾³ı
+     * è®¾ç½®åˆ é™¤æ ‡è¯†  1 æ­£å¸¸ 0 åˆ é™¤
      *
-     * @param valid É¾³ı±êÊ¶  1 Õı³£ 0 É¾³ı
+     * @param valid åˆ é™¤æ ‡è¯†  1 æ­£å¸¸ 0 åˆ é™¤
      */
     public void setValid(Byte valid) {
         this.valid = valid;
