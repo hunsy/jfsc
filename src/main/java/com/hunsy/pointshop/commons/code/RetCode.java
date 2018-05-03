@@ -20,6 +20,7 @@ public enum RetCode {
 
     LEVEL_NOT_EXIST(3001, "等级不存在"),
     LEVEL_NEXT_MIN_SCORE(3002, "不能输入小于上一级的最小值"),
+    LEVEL_NOT_GT_NEXT_MIN_SCORE(3003, "不能输入大于下一级的最小值"),
 
     EVENT_NOT_EXIST(4001, "事件不存在"),
 

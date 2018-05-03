@@ -27,20 +27,29 @@ public class LevelService extends BaseService<Level> {
         if (max == null) {
             level.setLevel(1);
         } else {
+            if (level.getMinScore() < max.getMinScore()) {
+                throw new BizException(RetCode.LEVEL_NEXT_MIN_SCORE);
+            }
             level.setLevel(max.getLevel() + 1);
         }
-        if (level.getMinScore() < max.getMinScore()) {
-            throw new BizException(RetCode.LEVEL_NEXT_MIN_SCORE);
-        }
+
         return super.insertSelective(level) == 1;
     }
 
 
     public boolean updateLevel(Level level) throws BizException {
         Level dbLevel = findById(level.getId());
-        Level max = this.findMaxLevel(dbLevel.getAppId());
-        if (level.getMinScore() < max.getMinScore()) {
-            throw new BizException(RetCode.LEVEL_NEXT_MIN_SCORE);
+
+        if (dbLevel.getLevel() > 1) {
+            Level pre = this.findByAppIdAndLevel(dbLevel.getAppId(), dbLevel.getLevel() - 1);
+            if (level.getMinScore() < pre.getMinScore()) {
+                throw new BizException(RetCode.LEVEL_NEXT_MIN_SCORE);
+            }
+
+            Level next = this.findByAppIdAndLevel(dbLevel.getAppId(), dbLevel.getLevel() + 1);
+            if (next != null && level.getMinScore() > next.getMinScore()) {
+                throw new BizException(RetCode.LEVEL_NOT_GT_NEXT_MIN_SCORE);
+            }
         }
         return super.updatedSelective(level) == 1;
     }
@@ -57,6 +66,20 @@ public class LevelService extends BaseService<Level> {
         level.setValid((byte) 1);
         level.setId(id);
         return super.selectOne(level);
+    }
+
+    /**
+     * 查询对应等级的等级
+     *
+     * @param appId
+     * @param level
+     * @return
+     */
+    public Level findByAppIdAndLevel(Long appId, int level) {
+        Level l = new Level();
+        l.setLevel(level);
+        l.setAppId(appId);
+        return super.selectOne(l);
     }
 
     /**
