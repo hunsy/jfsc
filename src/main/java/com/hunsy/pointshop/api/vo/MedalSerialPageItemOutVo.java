@@ -1,27 +1,21 @@
 package com.hunsy.pointshop.api.vo;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
-public class ModalSerialUpdateInVo implements Serializable {
+public class MedalSerialPageItemOutVo implements Serializable {
 
 
-    @NotNull
     private Long id;
 
-    private Long appId;
     /**
      * 名称
      */
 
-    @Size(min = 3, max = 16)
     private String name;
 
-    @Min(1)
-    @Max(3)
     private Byte type;
 
     /**
@@ -29,21 +23,19 @@ public class ModalSerialUpdateInVo implements Serializable {
      */
     private Byte status;
 
-    public Long getId() {
-        return id;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date updatedAt;
+
+    private Integer medalNum;
+
+    public String getId() {
+        return id + "";
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
-    }
 
     public String getName() {
         return name;
@@ -67,5 +59,21 @@ public class ModalSerialUpdateInVo implements Serializable {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Integer getMedalNum() {
+        return medalNum;
+    }
+
+    public void setMedalNum(Integer medalNum) {
+        this.medalNum = medalNum;
     }
 }

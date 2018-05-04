@@ -130,10 +130,10 @@ CREATE TABLE `level` (
 INSERT INTO `level` VALUES ('992006370360295424', '991981467603042304', '991915684390764544', '1', '1111', null, '1', '111', null, null, '1');
 
 -- ----------------------------
--- Table structure for `modal`
+-- Table structure for `medal`
 -- ----------------------------
-DROP TABLE IF EXISTS `modal`;
-CREATE TABLE `modal` (
+DROP TABLE IF EXISTS `medal`;
+CREATE TABLE `medal` (
   `id` bigint(20) NOT NULL,
   `app_id` bigint(20) NOT NULL,
   `created_by` bigint(20) NOT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE `modal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of modal
+-- Records of medal
 -- ----------------------------
 
 -- ----------------------------

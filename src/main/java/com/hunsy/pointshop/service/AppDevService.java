@@ -6,6 +6,7 @@ import com.hunsy.pointshop.entity.dto.AppDevDto;
 import com.hunsy.pointshop.mapper.AppDevMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -83,9 +84,11 @@ public class AppDevService extends BaseService<AppDev> {
         AppDev dbAd = super.selectOne(appDev);
         if (dbAd != null) {
             AppDev dad = new AppDev();
-            dad.setDevId(dbAd.getDevId());
             dad.setIsDefault(0);
-            super.updatedSelective(dad);
+            Example example = new Example(AppDev.class);
+            example.createCriteria()
+                    .andEqualTo("devId", dbAd.getDevId());
+            super.updatedByExampleSelective(dad, example);
             dbAd.setIsDefault(1);
             super.updatedSelective(dbAd);
         }

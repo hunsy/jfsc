@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hunsy.pointshop.mapper.UserInfoMapper">
-    <resultMap id="BaseResultMap" type="com.hunsy.pointshop.entity.UserInfo">
+<mapper namespace="com.hunsy.pointshop.mapper.MedalSerialMapper">
+    <resultMap id="BaseResultMap" type="com.hunsy.pointshop.entity.MedalSerial">
         <!--
           WARNING - @mbg.generated
         -->
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="app_id" property="appId" jdbcType="BIGINT"/>
         <result column="created_by" property="createdBy" jdbcType="BIGINT"/>
-        <result column="user_account" property="userAccount" jdbcType="VARCHAR"/>
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="medal_num" property="medalNum" jdbcType="INTEGER"/>
-        <result column="score" property="score" jdbcType="INTEGER"/>
-        <result column="integral" property="integral" jdbcType="INTEGER"/>
-        <result column="current_level" property="currentLevel" jdbcType="INTEGER"/>
-        <result column="virtual_icons" property="virtualIcons" jdbcType="BIGINT"/>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
         <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
         <result column="valid" property="valid" jdbcType="TINYINT"/>

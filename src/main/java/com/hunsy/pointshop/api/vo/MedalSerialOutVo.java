@@ -1,19 +1,14 @@
 package com.hunsy.pointshop.api.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
-import java.util.Date;
 
-public class ModalSerialPageItemOutVo implements Serializable {
+public class MedalSerialOutVo implements Serializable {
 
 
     private Long id;
-
     /**
      * 名称
      */
-
     private String name;
 
     private Byte type;
@@ -23,8 +18,6 @@ public class ModalSerialPageItemOutVo implements Serializable {
      */
     private Byte status;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updatedAt;
 
     public String getId() {
         return id + "";
@@ -33,7 +26,6 @@ public class ModalSerialPageItemOutVo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -57,13 +49,5 @@ public class ModalSerialPageItemOutVo implements Serializable {
 
     public void setStatus(Byte status) {
         this.status = status;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

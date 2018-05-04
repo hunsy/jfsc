@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class ModalInVo implements Serializable {
+public class MedalInVo implements Serializable {
 
     /**
      * 归属应用
@@ -26,7 +26,7 @@ public class ModalInVo implements Serializable {
      * 条件名称
      */
     @NotNull
-    @Size(max = 16, min = 3)
+    @Size(max = 16, min = 1)
     private String name;
 
     private String icon;

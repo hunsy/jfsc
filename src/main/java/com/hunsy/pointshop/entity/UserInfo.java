@@ -48,7 +48,7 @@ public class UserInfo extends BaseEntity {
      * 当前等级
      */
     @Column(name = "current_level")
-    private Long currentLevel;
+    private Integer currentLevel;
 
     /**
      * 虚拟货币数
@@ -132,20 +132,10 @@ public class UserInfo extends BaseEntity {
         this.nickName = nickName;
     }
 
-    /**
-     * 获取获取的勋章数
-     *
-     * @return medal_num - 获取的勋章数
-     */
     public Integer getMedalNum() {
         return medalNum;
     }
 
-    /**
-     * 设置获取的勋章数
-     *
-     * @param medalNum 获取的勋章数
-     */
     public void setMedalNum(Integer medalNum) {
         this.medalNum = medalNum;
     }
@@ -191,7 +181,7 @@ public class UserInfo extends BaseEntity {
      *
      * @return current_level - 当前等级
      */
-    public Long getCurrentLevel() {
+    public Integer getCurrentLevel() {
         return currentLevel;
     }
 
@@ -200,7 +190,7 @@ public class UserInfo extends BaseEntity {
      *
      * @param currentLevel 当前等级
      */
-    public void setCurrentLevel(Long currentLevel) {
+    public void setCurrentLevel(Integer currentLevel) {
         this.currentLevel = currentLevel;
     }
 

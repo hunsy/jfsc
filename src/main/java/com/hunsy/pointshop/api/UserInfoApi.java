@@ -32,8 +32,13 @@ public class UserInfoApi {
     private UserInfoService userInfoService;
 
     @PostMapping
-    public ResponseEntity<Object> save(@Valid @RequestBody UserInfoInVo vo) {
+    public ResponseEntity<Object> save(@Valid @RequestBody UserInfoInVo vo) throws BizException {
         AppDeveloper operate = MySecurityContextUtil.getDev();
+
+        UserInfo dbUser = userInfoService.findByAccount(vo.getAppId(), vo.getUserAccount());
+        if (dbUser != null) {
+            throw new BizException(RetCode.USER_EXIST);
+        }
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(vo, userInfo);
         if (StringUtils.isEmpty(userInfo.getNickName())) {
@@ -48,6 +53,7 @@ public class UserInfoApi {
     @PutMapping
     public ResponseEntity<Object> update(@Valid @RequestBody UserInfoUpdateInVo vo) {
 
+
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(vo, userInfo);
         boolean flag = userInfoService.updateInfo(userInfo);
@@ -55,7 +61,7 @@ public class UserInfoApi {
     }
 
 
-    @GetMapping("id")
+    @GetMapping("{id}")
     public ResponseEntity<Object> get(@PathVariable("id") Long id) throws BizException {
         UserInfo userInfo = userInfoService.findById(id);
         if (userInfo == null) {

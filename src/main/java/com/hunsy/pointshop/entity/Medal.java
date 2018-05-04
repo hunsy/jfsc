@@ -3,9 +3,11 @@ package com.hunsy.pointshop.entity;
 import com.hunsy.pointshop.commons.entity.BaseEntity;
 
 import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
 
-public class Modal extends BaseEntity {
+@Table(name = "medal")
+public class Medal extends BaseEntity {
 
     /**
      * 归属应用

@@ -1,6 +1,7 @@
 package com.hunsy.pointshop.api;
 
 import com.hunsy.pointshop.api.vo.AppDevItemvo;
+import com.hunsy.pointshop.api.vo.DeveloperUpdateInVo;
 import com.hunsy.pointshop.api.vo.ProfileOutVo;
 import com.hunsy.pointshop.commons.exception.BizException;
 import com.hunsy.pointshop.commons.response.DataRet;
@@ -14,11 +15,13 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -38,6 +41,25 @@ public class DeveloperAPi {
 
         developer.setNickName(RandomStringUtils.randomAlphanumeric(6));
         boolean flag = developerService.saveDev(developer);
+        return ResponseEntity.ok(DataRet.success());
+    }
+
+    @PutMapping("profile")
+    public ResponseEntity<Object> update(@Valid @RequestBody DeveloperUpdateInVo vo) {
+        AppDeveloper developer = (AppDeveloper) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (vo.getNickName() != null) {
+            developer.setNickName(vo.getNickName());
+        }
+
+        if (vo.getEmail() != null) {
+            developer.setEmail(vo.getEmail());
+        }
+
+        if (vo.getAvatar() != null) {
+            developer.setAvatar(vo.getAvatar());
+        }
+        developerService.updatedSelective(developer);
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(developer, null, Collections.emptyList()));
         return ResponseEntity.ok(DataRet.success());
     }
 

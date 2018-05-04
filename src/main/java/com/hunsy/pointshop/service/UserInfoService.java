@@ -42,4 +42,13 @@ public class UserInfoService extends BaseService<UserInfo> {
         example.orderBy("updatedAt").desc();
         return super.selectByWhere(example, pageNo, pageSize);
     }
+
+    public UserInfo findByAccount(Long appId, String userAccount) {
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAppId(appId);
+        userInfo.setUserAccount(userAccount);
+        userInfo.setValid((byte) 1);
+        return super.selectOne(userInfo);
+    }
 }

@@ -8,11 +8,13 @@ package com.hunsy.pointshop.commons.code;
 public enum RetCode {
     SUCCESS(200, "请求成功"),
     SYSTEM_ERROR(201, "系统异常"),
+    PARAM_ERROR(202, "参数异常"),
 
     //1000~1099 开发者相关异常
     DEVELOPER_EXIST(1001, "账号已被占用"),
     DEVELOPER_NOT_EXIST(1002, "账号不存在"),
 
+    APP_NOT_EXIST(1100, "应用不存在"),
 
     APP_DEV_NOT_EXIST(2001, "当前开发者没有这个应用"),
     APP_DEV_NOT_PERMISSION(2002, "当前开发者没有权限操作当前应用"),
@@ -24,11 +26,17 @@ public enum RetCode {
 
     EVENT_NOT_EXIST(4001, "事件不存在"),
 
-    MODAL_SERIAL_NOT_EXIST(5001, "勋章系列不存在"),
+    MEDAL_SERIAL_NOT_EXIST(5001, "勋章系列不存在"),
 
-    MODAL_NOT_EXIST(5101, "勋章不存在"),
 
-    USER_NOT_EXIST(6001, "用户不存在"),;
+    MEDAL_NOT_EXIST(5101, "勋章不存在"),
+    MEDAL_NOT_LT_LAST_EXIST(5102, "勋章获取条件不能低于前一个"),
+    MEDAL_NOT_GT_NEXT_EXIST(5103, "勋章获取条件不能高于后一个"),
+    MEDAL_NOT_ATTACH(5104, "未达到获取条件"),
+
+    USER_NOT_EXIST(6001, "用户不存在"),
+    USER_EXIST(6002, "用户已存在"),;
+
 
     private Integer code;
 

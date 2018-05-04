@@ -6,8 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "modal_serial")
-public class ModalSerial extends BaseEntity {
+@Table(name = "medal_serial")
+public class MedalSerial extends BaseEntity {
 
 
     @Column(name = "app_id")
@@ -39,6 +39,8 @@ public class ModalSerial extends BaseEntity {
      */
     private Byte valid;
 
+    //勋章数量
+    private Integer medalNum;
 
     /**
      * @return app_id
@@ -162,5 +164,13 @@ public class ModalSerial extends BaseEntity {
      */
     public void setValid(Byte valid) {
         this.valid = valid;
+    }
+
+    public Integer getMedalNum() {
+        return medalNum;
+    }
+
+    public void setMedalNum(Integer medalNum) {
+        this.medalNum = medalNum;
     }
 }

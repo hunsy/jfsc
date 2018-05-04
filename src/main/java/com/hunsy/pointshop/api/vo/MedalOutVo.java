@@ -1,13 +1,11 @@
 package com.hunsy.pointshop.api.vo;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class ModalUpdateInVo implements Serializable {
+public class MedalOutVo implements Serializable {
 
-    @NotNull
     private Long id;
     /**
      * 归属应用
@@ -20,6 +18,8 @@ public class ModalUpdateInVo implements Serializable {
      * 事件系列码
      */
     private Long eventId;
+
+    private String eventName;
 
     /**
      * 条件名称
@@ -46,32 +46,32 @@ public class ModalUpdateInVo implements Serializable {
      */
     private String stimulateWords;
 
-    public Long getId() {
-        return id;
+    public String getId() {
+        return id + "";
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getAppId() {
-        return appId;
+    public String getAppId() {
+        return appId + "";
     }
 
     public void setAppId(Long appId) {
         this.appId = appId;
     }
 
-    public Long getSerialId() {
-        return serialId;
+    public String getSerialId() {
+        return serialId + "";
     }
 
     public void setSerialId(Long serialId) {
         this.serialId = serialId;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public String getEventId() {
+        return eventId + "";
     }
 
     public void setEventId(Long eventId) {
@@ -124,5 +124,13 @@ public class ModalUpdateInVo implements Serializable {
 
     public void setStimulateWords(String stimulateWords) {
         this.stimulateWords = stimulateWords;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 }

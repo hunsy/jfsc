@@ -1,5 +1,6 @@
 package com.hunsy.pointshop.service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hunsy.pointshop.api.vo.LevelUpdateInVo;
 import com.hunsy.pointshop.commons.code.RetCode;
@@ -99,6 +100,28 @@ public class LevelService extends BaseService<Level> {
         List<Level> levels = super.selectByExample(example);
         return levels != null && !levels.isEmpty() ? levels.get(0) : null;
     }
+
+    /**
+     * 获取分数所在的等级
+     *
+     * @param appId
+     * @param score
+     * @return
+     */
+    public Level findByScore(Long appId, Integer score) {
+        Example example = new Example(Level.class);
+        example.createCriteria()
+                .andEqualTo("appId", appId)
+                .andLessThanOrEqualTo("minScore", score);
+        example.orderBy("minScore").desc();
+        PageHelper.startPage(0, 1);
+        List<Level> levels = super.selectByExample(example);
+        if (levels != null && levels.isEmpty()) {
+            return levels.get(0);
+        }
+        return null;
+    }
+
 
     public PageInfo<Level> findPage(Integer pageNo, Integer pageSize, LevelUpdateInVo params) {
 //        Level level = new Level();

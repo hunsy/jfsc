@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class ModalSerialInVo implements Serializable {
+public class MedalSerialInVo implements Serializable {
 
     @NotNull
     private Long appId;

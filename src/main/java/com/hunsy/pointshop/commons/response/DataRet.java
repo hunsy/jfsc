@@ -40,6 +40,11 @@ public class DataRet implements Serializable {
         return new DataRet(RetCode.SUCCESS.getCode(), RetCode.SUCCESS.getMsg(), null);
     }
 
+    public static DataRet fail(int code, String msg) {
+
+        return new DataRet(code, msg, null);
+    }
+
     public int getCode() {
         return code;
     }

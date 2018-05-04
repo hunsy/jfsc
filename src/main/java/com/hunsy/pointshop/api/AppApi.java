@@ -1,6 +1,7 @@
 package com.hunsy.pointshop.api;
 
 import com.hunsy.pointshop.api.vo.AppInVo;
+import com.hunsy.pointshop.api.vo.AppOutVo;
 import com.hunsy.pointshop.commons.code.RetCode;
 import com.hunsy.pointshop.commons.exception.BizException;
 import com.hunsy.pointshop.commons.response.DataRet;
@@ -73,10 +74,15 @@ public class AppApi {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<DataRet> get(@PathVariable("id") Long id) {
+    public ResponseEntity<DataRet> get(@PathVariable("id") Long id) throws BizException {
 
         App app = appService.findById(id);
-        return ResponseEntity.ok(DataRet.success(app));
+        if (app == null) {
+            throw new BizException(RetCode.APP_NOT_EXIST);
+        }
+        AppOutVo vo = new AppOutVo();
+        BeanUtils.copyProperties(app, vo);
+        return ResponseEntity.ok(DataRet.success(vo));
     }
 
     /**

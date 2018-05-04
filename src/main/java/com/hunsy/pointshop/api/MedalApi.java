@@ -1,18 +1,18 @@
 package com.hunsy.pointshop.api;
 
-import com.hunsy.pointshop.api.vo.ModalInVo;
-import com.hunsy.pointshop.api.vo.ModalItemOutVo;
-import com.hunsy.pointshop.api.vo.ModalOutVo;
-import com.hunsy.pointshop.api.vo.ModalUpdateInVo;
+import com.hunsy.pointshop.api.vo.MedalInVo;
+import com.hunsy.pointshop.api.vo.MedalItemOutVo;
+import com.hunsy.pointshop.api.vo.MedalOutVo;
+import com.hunsy.pointshop.api.vo.MedalUpdateInVo;
 import com.hunsy.pointshop.commons.code.RetCode;
 import com.hunsy.pointshop.commons.exception.BizException;
 import com.hunsy.pointshop.commons.response.DataRet;
 import com.hunsy.pointshop.commons.utils.MySecurityContextUtil;
 import com.hunsy.pointshop.entity.AppDeveloper;
 import com.hunsy.pointshop.entity.Event;
-import com.hunsy.pointshop.entity.Modal;
+import com.hunsy.pointshop.entity.Medal;
 import com.hunsy.pointshop.service.EventService;
-import com.hunsy.pointshop.service.ModalService;
+import com.hunsy.pointshop.service.MedalService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/modal")
-public class ModalApi {
+@RequestMapping(value = "api/medal")
+public class MedalApi {
 
     @Autowired
-    private ModalService modalService;
+    private MedalService medalService;
     @Autowired
     private EventService eventService;
 
@@ -37,36 +37,36 @@ public class ModalApi {
      * @return
      */
     @PostMapping
-    public ResponseEntity<Object> save(@Valid @RequestBody ModalInVo vo) {
+    public ResponseEntity<Object> save(@Valid @RequestBody MedalInVo vo) throws BizException {
 
         AppDeveloper operator = MySecurityContextUtil.getDev();
-        Modal modal = new Modal();
-        BeanUtils.copyProperties(vo, modal);
-        modal.setCreatedBy(operator.getId());
-        boolean flag = modalService.saveModal(modal);
+        Medal medal = new Medal();
+        BeanUtils.copyProperties(vo, medal);
+        medal.setCreatedBy(operator.getId());
+        boolean flag = medalService.saveMedal(medal);
         return ResponseEntity.ok(DataRet.success());
     }
 
     @PutMapping
-    public ResponseEntity<Object> update(@Valid @RequestBody ModalUpdateInVo vo) {
+    public ResponseEntity<Object> update(@Valid @RequestBody MedalUpdateInVo vo) throws BizException {
 
-        Modal modal = new Modal();
-        BeanUtils.copyProperties(vo, modal);
-        boolean flag = modalService.updateModal(modal);
+        Medal medal = new Medal();
+        BeanUtils.copyProperties(vo, medal);
+        boolean flag = medalService.updateMedal(medal);
         return ResponseEntity.ok(DataRet.success());
     }
 
 
     @GetMapping(value = "{id}")
     public ResponseEntity<Object> get(@PathVariable("id") Long id) throws BizException {
-        Modal modal = modalService.findById(id);
-        if (modal == null) {
-            throw new BizException(RetCode.MODAL_NOT_EXIST);
+        Medal medal = medalService.findById(id);
+        if (medal == null) {
+            throw new BizException(RetCode.MEDAL_NOT_EXIST);
         }
-        ModalOutVo vo = new ModalOutVo();
-        BeanUtils.copyProperties(modal, vo);
-        if (modal.getEventId() != null) {
-            Event event = eventService.findById(modal.getEventId());
+        MedalOutVo vo = new MedalOutVo();
+        BeanUtils.copyProperties(medal, vo);
+        if (medal.getEventId() != null) {
+            Event event = eventService.findById(medal.getEventId());
             if (event != null) {
                 vo.setEventName(event.getName());
             }
@@ -76,11 +76,11 @@ public class ModalApi {
 
     @GetMapping(value = "list/{serialId}")
     public ResponseEntity<Object> list(@PathVariable("serialId") Long serialId) throws BizException {
-        List<Modal> conditions = modalService.findListBySerialId(serialId);
-        List<ModalItemOutVo> vos = new ArrayList<>();
+        List<Medal> conditions = medalService.findListBySerialId(serialId);
+        List<MedalItemOutVo> vos = new ArrayList<>();
         if (conditions != null && !conditions.isEmpty()) {
             conditions.forEach(condition -> {
-                ModalItemOutVo vo = new ModalItemOutVo();
+                MedalItemOutVo vo = new MedalItemOutVo();
                 BeanUtils.copyProperties(condition, vo);
                 vos.add(vo);
             });
