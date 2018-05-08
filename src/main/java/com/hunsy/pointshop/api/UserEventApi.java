@@ -4,6 +4,7 @@ package com.hunsy.pointshop.api;
 import com.hunsy.pointshop.api.vo.UserEventInVo;
 import com.hunsy.pointshop.commons.code.RetCode;
 import com.hunsy.pointshop.commons.exception.BizException;
+import com.hunsy.pointshop.commons.response.DataRet;
 import com.hunsy.pointshop.entity.MedalSerial;
 import com.hunsy.pointshop.entity.UserEvents;
 import com.hunsy.pointshop.entity.UserInfo;
@@ -51,7 +52,7 @@ public class UserEventApi {
         }
 
 
-
+        return ResponseEntity.ok(DataRet.success());
 
     }
 

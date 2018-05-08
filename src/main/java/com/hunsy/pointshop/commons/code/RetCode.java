@@ -35,7 +35,9 @@ public enum RetCode {
     MEDAL_NOT_ATTACH(5104, "未达到获取条件"),
 
     USER_NOT_EXIST(6001, "用户不存在"),
-    USER_EXIST(6002, "用户已存在"),;
+    USER_EXIST(6002, "用户已存在"),
+
+    MENU_NOT_EXIST(7000, "菜单不存在或已被删除"),;
 
 
     private Integer code;
