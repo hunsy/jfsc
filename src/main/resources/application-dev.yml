@@ -4,6 +4,10 @@ server:
   tomcat:
     uri-encoding: UTF-8
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+#    default-property-inclusion: non_null
+    time-zone: GMT+8
   datasource:
     url: jdbc:mysql://140.143.238.212:3306/point_system?useUnicode=true&useSSL=false
     username: root

@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -62,8 +63,10 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                             developer.getMobile(),
                             developer.getPassword(),
                             Collections.emptyList()));
+        } catch (BadCredentialsException e) {
+            return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 

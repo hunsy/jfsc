@@ -14,9 +14,12 @@ import com.hunsy.pointshop.service.AppDevService;
 import com.hunsy.pointshop.service.AppService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;

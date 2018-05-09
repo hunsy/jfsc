@@ -2,6 +2,7 @@ package com.hunsy.pointshop.api;
 
 import com.github.pagehelper.PageInfo;
 import com.hunsy.pointshop.api.vo.*;
+import com.hunsy.pointshop.commons.code.RetCode;
 import com.hunsy.pointshop.commons.exception.BizException;
 import com.hunsy.pointshop.commons.response.DataRet;
 import com.hunsy.pointshop.commons.response.PageRetVo;
@@ -40,6 +41,28 @@ public class MenuApi {
         BeanUtils.copyProperties(vo, menu);
         menuService.updateMenu(menu);
         return ResponseEntity.ok(DataRet.success());
+    }
+
+
+    @GetMapping(value = "{id}")
+    public ResponseEntity<Object> get(@PathVariable("id") Long id) throws BizException {
+
+        Menu menu = menuService.findById(id);
+        if (menu == null) {
+            throw new BizException(RetCode.MENU_NOT_EXIST);
+        }
+
+        MenuOutVo vo = new MenuOutVo();
+        BeanUtils.copyProperties(menu, vo);
+        return ResponseEntity.ok(DataRet.success(vo));
+    }
+
+
+    @GetMapping(value = "parents")
+    public ResponseEntity<Object> parents() {
+
+        List<MenuPageItemOutVo> menus = menuService.findParents();
+        return ResponseEntity.ok(DataRet.success(menus));
     }
 
 

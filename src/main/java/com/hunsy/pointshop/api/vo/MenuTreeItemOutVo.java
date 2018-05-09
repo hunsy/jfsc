@@ -9,6 +9,8 @@ import java.util.List;
 public class MenuTreeItemOutVo implements Serializable {
 
     private Long id;
+
+    private Long parentId;
     /**
      * 菜单名称
      */
@@ -26,12 +28,21 @@ public class MenuTreeItemOutVo implements Serializable {
 
     private List<MenuTreeItemOutVo> children;
 
-    public Long getId() {
-        return id;
+
+    public String getId() {
+        return id + "";
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getParentId() {
+        return parentId == null ? "" : parentId + "";
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getName() {

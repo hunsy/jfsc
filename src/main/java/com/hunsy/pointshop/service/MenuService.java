@@ -76,7 +76,7 @@ public class MenuService extends BaseService<Menu> {
 
     private List<MenuTreeItemOutVo> findForTree(MenuTreeItemOutVo vo) {
 
-        List<Menu> menus = findByParentId(vo.getId());
+        List<Menu> menus = findByParentId(Long.parseLong(vo.getId()));
         List<MenuTreeItemOutVo> vos = new ArrayList<>();
         if (menus != null && !menus.isEmpty()) {
             menus.forEach(menu -> {
@@ -84,7 +84,7 @@ public class MenuService extends BaseService<Menu> {
                 BeanUtils.copyProperties(menu, tvo);
                 List<MenuTreeItemOutVo> nextMenus = findForTree(tvo);
 //                if (nextMenus != null && !nextMenus.isEmpty()) {
-                    tvo.setChildren(nextMenus);
+                tvo.setChildren(nextMenus);
 //                }
                 vos.add(tvo);
             });
@@ -112,20 +112,13 @@ public class MenuService extends BaseService<Menu> {
     }
 
 
-    /**
-     * 分页查询
-     *
-     * @param vo
-     * @return
-     */
-    public PageInfo<MenuPageItemOutVo> findPage(MenuPageParamInVo vo) {
+    public List<MenuPageItemOutVo> findParents() {
 
         Example example = new Example(Menu.class);
         example.createCriteria()
-                .andIsNull("parentId")
-                .andEqualTo("valid", 1);
+                .andEqualTo("valid", 1)
+                .andIsNull("parentId");
         example.orderBy("name").asc();
-        PageHelper.startPage(vo.getPageNo(), vo.getPageNo() * vo.getPageSize());
         List<Menu> menus = super.selectByExample(example);
         List<MenuPageItemOutVo> vos = new ArrayList<>();
         if (menus != null && !menus.isEmpty()) {
@@ -135,7 +128,21 @@ public class MenuService extends BaseService<Menu> {
                 vos.add(v);
             });
         }
-        return new PageInfo<>(vos);
+        return vos;
+    }
+
+
+    /**
+     * 分页查询
+     *
+     * @param vo
+     * @return
+     */
+    public PageInfo<MenuPageItemOutVo> findPage(MenuPageParamInVo vo) {
+
+        PageHelper.startPage(vo.getPageNo(), vo.getPageNo() * vo.getPageSize());
+        List<MenuPageItemOutVo> menus = findParents();
+        return new PageInfo<>(menus);
     }
 
 
